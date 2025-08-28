@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🐍 Python Kursu – Sıfırdan İleri (Tek Sayfa)</title>
+<meta name="description" content="Sıfırdan ileri seviye Python kursu: anlatım, örnek kod, çoktan seçmeli quiz, projeler, SSS.">
+<style>
+  :root{
+    --bg:#0b1020; --panel:#131a35; --ink:#e6e9f2; --muted:#9aa3b2; --line:#ffffff22;
+    --gold:#ffd700; --chip:#0e1430; --code:#0a0f1d; --ok:#7ef7a6; --no:#ff9a9a;
+  }
+  [data-theme="light"]{
+    --bg:#f7f8fb; --panel:#ffffff; --ink:#0f1222; --muted:#4b5563; --line:#00000010;
+    --chip:#f2f4f8; --code:#111827; --ok:#0ea5e9; --no:#ef4444;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; font-family:Inter,Segoe UI,Arial,sans-serif; background:var(--bg); color:var(--ink)}
+  a{color:var(--gold); text-decoration:none}
+  header{position:sticky; top:0; z-index:50; backdrop-filter:blur(8px);
+    background:linear-gradient(180deg,#0008,#0000); border-bottom:1px solid var(--line)}
+  .nav{max-width:1100px; margin:auto; display:flex; gap:12px; align-items:center; justify-content:space-between; padding:12px 16px}
+  .brand{font-weight:900; letter-spacing:.3px}
+  .brand .accent{color:var(--gold)}
+  .wrap{max-width:1100px; margin:10px auto 90px; padding:0 16px}
+  .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:16px; margin-top:16px}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:16px}
+  .pill{display:inline-block; padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:var(--chip); color:var(--muted); font-size:.85rem}
+  .btn{border:none; background:var(--gold); color:#221; font-weight:800; padding:10px 14px; border-radius:999px; cursor:pointer}
+  .ghost{background:transparent; color:var(--ink); border:1px solid var(--line)}
+  .grid{display:grid; gap:16px}
+  .toc{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  h1,h2,h3{margin:.2em 0}
+  h2{font-size:1.35rem}
+  h3{font-size:1.1rem}
+  .section{scroll-margin-top:80px; margin-top:22px}
+  .lesson{border:1px solid var(--line); border-radius:16px; overflow:hidden}
+  .lesson header{position:static; background:transparent; border-bottom:1px solid var(--line)}
+  .lesson-head{display:flex; gap:10px; align-items:center; justify-content:space-between; padding:12px 14px}
+  .lesson-title{margin:0; font-size:1.1rem}
+  .lesson-body{padding:12px 14px; background:var(--panel)}
+  .chip{display:inline-block; padding:2px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted); font-size:.75rem}
+  .badge{color:var(--muted); font-size:.9rem}
+  pre{margin:10px 0 0 0; padding:12px; border-radius:12px; background:var(--code); color:#c7ffbf; overflow:auto}
+  code{font-family:Consolas,ui-monospace,Menlo,Monaco,monospace}
+  .codebar{display:flex; justify-content:flex-end; margin-top:8px}
+  .qa{border:1px dashed var(--line); border-radius:12px; padding:10px; margin:10px 0}
+  .opt{display:flex; gap:8px; align-items:flex-start; margin:6px 0}
+  .opt input{margin-top:2px}
+  .result.ok{color:var(--ok); font-weight:700}
+  .result.no{color:var(--no); font-weight:700}
+  .progress{height:8px; background:#00000018; border-radius:999px; overflow:hidden}
+  .bar{height:100%; width:0; background:linear-gradient(90deg,var(--gold),#fff1a6)}
+  footer{position:fixed; bottom:0; left:0; right:0; padding:10px 16px; text-align:center; color:var(--muted);
+    background:linear-gradient(0deg,#0008,#0000); border-top:1px solid var(--line); backdrop-filter:blur(8px)}
+  .flex{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+  @media (max-width:900px){.hero{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">🐍 <span class="accent">Python Kursu</span> — Sıfırdan İleri</div>
+    <div class="flex">
+      <button id="toggleTheme" class="btn ghost">🌙 Karanlık/Açık</button>
+      <button id="resetAll" class="btn ghost">İlerlemeyi Sıfırla</button>
+      <a class="btn" href="#dersler">Derslere Başla</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="card">
+      <span class="pill">Tamamen Ücretsiz • Adım adım • Quiz’li</span>
+      <h1>Python’u sıfırdan, zor konulara kadar öğren</h1>
+      <p class="badge">Her bölüm: kısa anlatım → örnek kod → <b>kolay→zor</b> quiz. İlerlemen tarayıcıda saklanır.</p>
+      <div class="flex">
+        <a class="btn" href="#dersler">🚀 Başla</a>
+        <a class="btn ghost" href="#projeler">🧪 Projeler</a>
+        <a class="btn ghost" href="#sss">❓ SSS</a>
+      </div>
+      <div style="margin-top:12px">
+        <div class="progress"><div id="globalBar" class="bar"></div></div>
+        <div class="badge" id="globalInfo">0/0 tamamlandı</div>
+      </div>
+    </div>
+    <div class="grid card">
+      <h2>İçindekiler</h2>
+      <div id="toc" class="grid toc"></div>
+    </div>
+  </section>
+
+  <!-- DERSLER -->
+  <section id="dersler" class="section">
+    <h2>📚 Dersler</h2>
+    <p class="badge">Aşağıdaki dersleri sırayla takip et. Her bölümün sonunda quiz var; doğru/yanlış ve açıklama anında görünür.</p>
+    <div id="lessonContainer" class="grid" style="grid-template-columns:1fr"></div>
+  </section>
+
+  <!-- PROJELER -->
+  <section id="projeler" class="section">
+    <h2>🧪 Mini Projeler (Temel → Orta)</h2>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div class="card">
+        <h3>1) Sayı Tahmin Oyunu</h3>
+        <p>Rastgele 1–100 sayı; kullanıcı tahmin eder, ipucu ver.</p>
+<pre><code>import random
+hedef = random.randint(1, 100)
+tahmin = 0
+hak = 7
+while hak &gt; 0:
+    tahmin = int(input("Tahmin: "))
+    if tahmin == hedef:
+        print("Bildin!")
+        break
+    print("Yukarı" if tahmin &lt; hedef else "Aşağı")
+    hak -= 1
+print("Sayı:", hedef)</code></pre>
+      </div>
+      <div class="card">
+        <h3>2) To-Do (Dosyaya Kaydeden)</h3>
+<pre><code>def ekle(m): 
+    with open("todo.txt","a",encoding="utf-8") as f: f.write(m+"\n")
+def liste():
+    try:
+        print(open("todo.txt","r",encoding="utf-8").read())
+    except FileNotFoundError:
+        print("Liste boş")
+while True:
+    komut = input("(e)kle, (l)iste, (q)uit: ")
+    if komut == "e": ekle(input("Madde: "))
+    elif komut == "l": liste()
+    else: break</code></pre>
+      </div>
+      <div class="card">
+        <h3>3) Web Scraping (requests + bs4)</h3>
+<pre><code>import requests
+from bs4 import BeautifulSoup
+html = requests.get("https://example.com").text
+soup = BeautifulSoup(html, "html.parser")
+for a in soup.select("a"):
+    print(a.get_text(strip=True), a.get("href"))</code></pre>
+        <p class="badge">Not: Bazı siteler scraping'e izin vermez; robots.txt & hukuka dikkat.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SSS -->
+  <section id="sss" class="section">
+    <h2>❓ Sık Sorulan Sorular</h2>
+    <div class="card">
+      <details open><summary><b>Python nasıl kurulur?</b></summary>
+        <p>python.org → Download. Windows’ta <i>Add Python to PATH</i> işaretle. Terminalde <code>python --version</code> görmelisin.</p>
+      </details>
+      <details><summary><b>Hangi editörü önerirsin?</b></summary>
+        <p>VS Code + Python eklentisi. Dosyayı <code>.py</code> uzantısıyla kaydet, terminalden <code>python dosya.py</code> çalıştır.</p>
+      </details>
+      <details><summary><b>Türkçe karakter & encoding?</b></summary>
+        <p>Dosya açarken <code>encoding="utf-8"</code> kullan.</p>
+      </details>
+      <details><summary><b>Bu site çevrimdışı çalışır mı?</b></summary>
+        <p>Evet. Tek bir <code>index.html</code> dosyasıdır.</p>
+      </details>
+    </div>
+  </section>
+</div>
+
+<footer>© 2026 – Mamimin Python Okulu • İlerleme tarayıcında kaydedilir</footer>
+
+<script>
+/* ================== VERİ: DERS İÇERİKLERİ (kolay→zor) ================== */
+const DERSLER = [
+  {
+    id:"giris", seviye:"Kolay",
+    baslik:"Python Nedir? Kurulum ve İlk Çalıştırma",
+    ozet:"Genel bakış, neden Python, ilk 'Merhaba Dünya'.",
+    icerik:[
+      {t:"Python nedir?", p:"Çok amaçlı, okunabilir, dev ekosisteme sahip bir programlama dili. Web, veri, yapay zekâ, otomasyon..."},
+      {t:"Neden Python?", p:"Basit sözdizimi, güçlü kütüphaneler, topluluk ve taşınabilirlik."},
+      {t:"İlk program", p:"Ekrana yazı bas:", code:`print("Merhaba Dünya")`},
+      {t:"Terminalden çalıştırma", p:"Dosyayı merhaba.py kaydet; terminalde:", code:`python merhaba.py  # (bazı sistemlerde python3)`}
+    ],
+    quiz:[
+      {q:"Python hangi alanlar için uygundur?", a:["Sadece web","Birçok alan (veri, AI, otomasyon...)","Sadece mobil"], ok:1, exp:"Çok amaçlıdır."},
+      {q:"Ekrana yazdırma fonksiyonu?", a:[`echo()`,`console.log()`,`print()`], ok:2, exp:"Python'da print."}
+    ]
+  },
+  {
+    id:"degisken_tip", seviye:"Kolay",
+    baslik:"Değişkenler ve Veri Tipleri",
+    ozet:"int, float, str, bool, type(), tip dönüşümleri, input().",
+    icerik:[
+      {t:"Temel tipler", p:"Örnek:", code:`yas=21; pi=3.14; ad="Mami"; aktif=True\nprint(type(yas), type(pi), type(ad), type(aktif))`},
+      {t:"Dönüştürme", p:"str ↔ int/float:", code:`int("42")+1\nfloat("3.5")+1`},
+      {t:"input()", p:"Kullanıcıdan veri alır ve her zaman string döner.", code:`ad = input("Adın? ") \nprint("Selam", ad)`}
+    ],
+    quiz:[
+      {q:"input() varsayılan dönüş tipi?", a:["int","str","bool"], ok:1, exp:"Her zaman string döner."},
+      {q:"'3.14' → 3.14 yapmak için?", a:["int('3.14')","float('3.14')","str(3.14)"], ok:1, exp:"float ile dönüştür."},
+      {q:"bool tipinin değerleri?", a:["Yes/No","True/False","1/0"], ok:1, exp:"True ve False anahtar sözcükleridir."}
+    ]
+  },
+  {
+    id:"operator", seviye:"Kolay",
+    baslik:"Operatörler",
+    ozet:"+ - * / % // **, karşılaştırma, mantıksal.",
+    icerik:[
+      {t:"Aritmetik", p:"Temeller:", code:`a=7; b=3\nprint(a+b, a-b, a*b, a/b, a%b, a//b, a**b)`},
+      {t:"Karşılaştırma", p:"==, !=, >, <", code:`print(5==5, 5!=4, 3>2, 2<=2)`},
+      {t:"Mantıksal", p:"and, or, not:", code:`print(True and False, True or False, not False)`}
+    ],
+    quiz:[
+      {q:"7//3 sonucu?", a:["2","2.333","3"], ok:0, exp:"// tamsayı bölme."},
+      {q:"Mantıksal 'veya'?", a:["and","or","xor"], ok:1, exp:"Python'da 'or'."}
+    ]
+  },
+  {
+    id:"kosul", seviye:"Orta",
+    baslik:"Koşullar (if/elif/else)",
+    ozet:"Karar yapıları, iç içe koşullar, üçlü ifade.",
+    icerik:[
+      {t:"if-else", p:"", code:`sayi=10\nif sayi>5:\n    print("Büyük")\nelse:\n    print("Küçük veya eşit")`},
+      {t:"elif", p:"Ek dallar:", code:`puan=73\nif puan>=85: print("Pekiyi")\nelif puan>=70: print("İyi")\nelse: print("Gelişmeli")`},
+      {t:"Tek satır", p:"Koşullu ifade:", code:`n=7\nprint("Çift" if n%2==0 else "Tek")`}
+    ],
+    quiz:[
+      {q:"elif ne işe yarar?", a:["Döngü başlatır","Ek koşul dalları ekler","Yorum satırı"], ok:1, exp:"Birden fazla durum."}
+    ]
+  },
+  {
+    id:"dongu", seviye:"Orta",
+    baslik:"Döngüler (for/while), range(), break/continue",
+    ozet:"Tekrarlar, sayaçlar, iç içe döngüler.",
+    icerik:[
+      {t:"for & range", p:"0..4:", code:`for i in range(5):\n    print(i)`},
+      {t:"while", p:"Koşul doğruyken döner:", code:`i=3\nwhile i>0:\n    print(i)\n    i-=1`},
+      {t:"break/continue", p:"Akış kontrolü:", code:`for i in range(5):\n    if i==3: break\n    if i%2==0: continue\n    print(i)`}
+    ],
+    quiz:[
+      {q:"range(3) çıktısı?", a:["1,2,3","0,1,2","0,1,2,3"], ok:1, exp:"Bitiş hariç."},
+      {q:"break ne yapar?", a:["Bir kez atlar","Döngüyü bitirir","Değişkeni sıfırlar"], ok:1, exp:"Döngüden çıkar."}
+    ]
+  },
+  {
+    id:"koleksiyon", seviye:"Orta",
+    baslik:"Listeler, Tuple, String Dilimleri",
+    ozet:"Erişim, ekleme, dilimleme, immutability.",
+    icerik:[
+      {t:"Liste", p:"", code:`l=[10,"mami",True]\nl.append(99)\nprint(l[0], len(l))`},
+      {t:"Tuple", p:"Değiştirilemez:", code:`t=(1,2,3)\n# t[0]=9  # HATA\nprint(t[1])`},
+      {t:"String slice", p:"", code:`s="PYTHON"\nprint(s[0:3], s[-1], s[::2])  # PYT? Hayır: PYT değil, P T O N => 'PTO N' -> 'PTO N' \nprint("python"[::2])  # 'ptn'`}
+    ],
+    quiz:[
+      {q:"Tuple için doğru ifade?", a:["Değiştirilebilir","Değiştirilemez","Sadece sayısal"], ok:1, exp:"Immutable."},
+      {q:"'python'[::2] çıktısı?", a:["py","pto","ptn"], ok:2, exp:"0,2,4 index → p t n."}
+    ]
+  },
+  {
+    id:"dict_set", seviye:"Orta",
+    baslik:"Sözlük (dict) ve Kümeler (set)",
+    ozet:"Anahtar-değer, items(), benzersiz elemanlar.",
+    icerik:[
+      {t:"dict", p:"", code:`kisi={"ad":"Mami","yas":21}\nprint(kisi["ad"])\nkisi["sehir"]="Kırşehir"`},
+      {t:"Gezinme", p:"", code:`for k,v in kisi.items():\n    print(k,"=>",v)`},
+      {t:"set", p:"Tekrarsız:", code:`s={1,2,2,3}\nprint(s)  # {1,2,3}`}
+    ],
+    quiz:[
+      {q:"Aynı anahtar tekrar yazılırsa?", a:["Hata","Güncellenir","Liste olur"], ok:1, exp:"Son değer geçerli olur."},
+      {q:"set özelliği?", a:["Sıralıdır","Tekrarsızdır","Anahtar-değer saklar"], ok:1, exp:"Benzersiz elemanlar."}
+    ]
+  },
+  {
+    id:"fonksiyon", seviye:"Orta",
+    baslik:"Fonksiyonlar, Parametre & Return, Lambda",
+    ozet:"def, dönüş değeri, varsayılan/anahtar parametre.",
+    icerik:[
+      {t:"Temel", p:"", code:`def selam(isim):\n    print("Selam", isim)\nselam("Mami")`},
+      {t:"Return", p:"", code:`def kare(x):\n    return x*x\nprint(kare(5))`},
+      {t:"Varsayılan & anahtar", p:"", code:`def yaz(metin, son="\\n"):\n    print(metin, end=son)\nyaz("A"); yaz("B", son="!")`},
+      {t:"Lambda", p:"", code:`kare=lambda x:x*x\nprint(kare(6))`}
+    ],
+    quiz:[
+      {q:"Dönüş değeri yoksa ne döner?", a:["0","None","False"], ok:1, exp:"Varsayılan None."},
+      {q:"Lambda sözdizimi?", a:[`def f(x): return x+1`,`lambda x:x+1`,`x=>x+1`], ok:1, exp:"lambda x: ..."}
+    ]
+  },
+  {
+    id:"hata", seviye:"Zor",
+    baslik:"Hata Yönetimi (try/except/else/finally)",
+    ozet:"Öngörülebilir hataları yakalama ve temiz kapatma.",
+    icerik:[
+      {t:"Temel", p:"", code:`try:\n    x=int("aa")\nexcept ValueError:\n    print("Sayı değil")`},
+      {t:"Çoklu except", p:"", code:`try:\n    f=open("yok.txt")\nexcept FileNotFoundError:\n    print("Dosya yok")\nexcept Exception as e:\n    print("Diğer hata:", e)`},
+      {t:"else/finally", p:"", code:`try:\n    n=int("5")\nexcept ValueError:\n    print("Hata")\nelse:\n    print("Hata yok")\nfinally:\n    print("Her durumda çalışır")`}
+    ],
+    quiz:[
+      {q:"Hangi blok hep çalışır?", a:["try","except","finally"], ok:2, exp:"finally daima."}
+    ]
+  },
+  {
+    id:"dosya", seviye:"Zor",
+    baslik:"Dosya İşlemleri (open/read/write/with/encoding)",
+    ozet:"Okuma, yazma, ekleme; UTF-8.",
+    icerik:[
+      {t:"Okuma", p:"", code:`with open("notlar.txt","r",encoding="utf-8") as f:\n    print(f.read())`},
+      {t:"Yazma", p:"", code:`with open("notlar.txt","w",encoding="utf-8") as f:\n    f.write("Merhaba\\n")`},
+      {t:"Ekleme", p:"", code:`with open("notlar.txt","a",encoding="utf-8") as f:\n    f.write("Devam...\\n")`}
+    ],
+    quiz:[
+      {q:"with kullanmak neden iyi?", a:["Hızlıdır","Otomatik kapatır","Hata vermez"], ok:1, exp:"Kaynak yönetimi."}
+    ]
+  },
+  {
+    id:"modul_pip", seviye:"Zor",
+    baslik:"Modüller, Paketler ve pip",
+    ozet:"import, from import, pip ile yükleme.",
+    icerik:[
+      {t:"import", p:"", code:`import math\nprint(math.sqrt(16))`},
+      {t:"from import", p:"", code:`from random import randint\nprint(randint(1,10))`},
+      {t:"pip", p:"Terminal:", code:`pip install requests`}
+    ],
+    quiz:[
+      {q:"math modülünde karekök?", a:[`sqrt(16)`,`math.sqrt(16)`,`Math.sqrt(16)`], ok:1, exp:"math.sqrt."},
+      {q:"pip ne yapar?", a:["Python'ı günceller","Paket yönetir","Sunucu açar"], ok:1, exp:"Kütüphane kurar."}
+    ]
+  },
+  {
+    id:"oop", seviye:"Zor",
+    baslik:"Nesne Yönelimli Programlama (OOP)",
+    ozet:"class, __init__, miras, __str__.",
+    icerik:[
+      {t:"Sınıf/Nesne", p:"", code:`class Kisi:\n    def __init__(self, ad): self.ad=ad\n    def selam(self): print("Selam", self.ad)\nKisi("Mami").selam()`},
+      {t:"Miras", p:"", code:`class Hayvan: \n    def ses(self): print("...")\nclass Kedi(Hayvan):\n    def ses(self): print("Miyav")\nKedi().ses()`},
+      {t:"__str__", p:"", code:`class Urun:\n    def __init__(self,ad,f): self.ad=ad; self.f=f\n    def __str__(self): return f"{self.ad}({self.f}₺)"\nprint(Urun("Kalem",10))`}
+    ],
+    quiz:[
+      {q:"self nedir?", a:["Örneği temsil eder","Sınıf adı","Dış modül"], ok:0, exp:"Metotlarda instance referansı."},
+      {q:"Alt sınıfta metodu ezmeye?", a:["shadow","override","overload"], ok:1, exp:"Üst metodu geçersiz kılma."}
+    ]
+  },
+  {
+    id:"ileri_listcomp", seviye:"Zor",
+    baslik:"Liste Anlamaları, Generator, Decorator, Context",
+    ozet:"Daha ileri Python araçları.",
+    icerik:[
+      {t:"List comprehension", p:"", code:`kareler = [x*x for x in range(6) if x%2==0]\nprint(kareler)`},
+      {t:"Generator", p:"Bellek-dostu akış:", code:`def gerisay(n):\n    while n>0:\n        yield n\n        n-=1\nfor s in gerisay(3): print(s)`},
+      {t:"Decorator", p:"", code:`def log(f):\n    def ic(*a,**k):\n        print("çalışıyor", f.__name__)\n        return f(*a,**k)\n    return ic\n@log\ndef selam(): print("hey")\nselam()`},
+      {t:"Context Manager", p:"", code:`from contextlib import contextmanager\n@contextmanager\ndef ac_yaz(ad):\n    f=open(ad,"w",encoding="utf-8")\n    try: yield f\n    finally: f.close()\nwith ac_yaz("a.txt") as f: f.write("hi")`}
+    ],
+    quiz:[
+      {q:"List comprehension ne sağlar?", a:["Daha yavaş ama kısa","Kısa ve çoğu zaman hızlı/okunur","Sadece tuple üretir"], ok:1, exp:"Kısa, çoğu durumda verimli."},
+      {q:"yield ne yapar?", a:["Fonksiyonu bitirir","Generator üretir","Thread başlatır"], ok:1, exp:"Iterator akışı sağlar."}
+    ]
+  }
+];
+
+/* ================== RENDER: TOC ve Dersler ================== */
+const qs = s=>document.querySelector(s);
+const toc = qs('#toc');
+const cont = qs('#lessonContainer');
+const globalBar = qs('#globalBar');
+const globalInfo = qs('#globalInfo');
+
+function createLessonCard(L){
+  const wrap = document.createElement('article');
+  wrap.className='lesson';
+  wrap.id = L.id;
+  wrap.innerHTML = `
+    <header>
+      <div class="lesson-head">
+        <div>
+          <h3 class="lesson-title">${L.baslik}</h3>
+          <div class="badge">${L.ozet}</div>
+        </div>
+        <div class="flex">
+          <span class="chip">${L.seviye}</span>
+          <button class="btn ghost mini" data-action="tamamla">✔ Bölümü İşaretle</button>
+        </div>
+      </div>
+    </header>
+    <div class="lesson-body"></div>
+  `;
+  const body = wrap.querySelector('.lesson-body');
+
+  // İçerik adımlarını ekle
+  L.icerik.forEach(step=>{
+    const card = document.createElement('div');
+    card.className='card';
+    card.innerHTML = `<h4>${step.t}</h4><p>${step.p||""}</p>` + (step.code? `<pre><code>${escapeHtml(step.code)}</code></pre>
+      <div class="codebar"><button class="btn ghost mini">Kodu Kopyala</button></div>` : "");
+    if(step.code){
+      const btn = card.querySelector('.codebar button');
+      btn.onclick=()=>copyText(step.code, btn);
+    }
+    body.appendChild(card);
+  });
+
+  // Quiz
+  if(L.quiz?.length){
+    const quizCard = document.createElement('div');
+    quizCard.className='card';
+    const quizWrap = document.createElement('div');
+    quizWrap.innerHTML = `<h4>📝 Quiz</h4>`;
+    L.quiz.forEach((q,i)=>{
+      const qbox = document.createElement('div');
+      qbox.className='qa';
+      qbox.innerHTML = `<div><b>Soru ${i+1}:</b> ${q.q}</div>`;
+      q.a.forEach((sec,si)=>{
+        const lab = document.createElement('label');
+        lab.className='opt';
+        lab.innerHTML = `<input type="radio" name="q_${L.id}_${i}" value="${si}"> <div><code>${escapeHtml(sec)}</code></div>`;
+        qbox.appendChild(lab);
+      });
+      const res = document.createElement('div'); res.className='badge'; qbox.appendChild(res);
+      quizWrap.appendChild(qbox);
+    });
+    const row = document.createElement('div'); row.className='flex';
+    const check = document.createElement('button'); check.className='btn'; check.textContent='Cevapları Kontrol Et';
+    const score = document.createElement('div'); score.className='badge';
+    row.append(check, score);
+    check.onclick=()=>{
+      let dogru=0;
+      [...quizWrap.querySelectorAll('.qa')].forEach((qbox,qi)=>{
+        const sel = qbox.querySelector('input:checked');
+        const res = qbox.querySelector('.badge');
+        const q = L.quiz[qi];
+        if(!sel){ res.innerHTML='<span class="no result">Seçilmedi</span>'; return; }
+        const ok = Number(sel.value)===q.ok;
+        if(ok){ dogru++; res.innerHTML=`<span class="ok result">Doğru!</span> – ${q.exp||""}`; }
+        else { res.innerHTML=`<span class="no result">Yanlış.</span> Doğru: <b>${escapeHtml(q.a[q.ok])}</b> – ${q.exp||""}`; }
+      });
+      score.textContent = `Puan: ${dogru}/${L.quiz.length}`;
+    };
+    quizCard.append(quizWrap,row);
+    body.appendChild(quizCard);
+  }
+
+  // Bölüm tamamlandı butonu
+  wrap.querySelector('[data-action="tamamla"]').onclick=()=>{
+    tamamlaBolum(L.id,true);
+    guncelleGlobal();
+  };
+
+  return wrap;
+}
+
+function renderAll(){
+  // TOC
+  toc.innerHTML='';
+  DERSLER.forEach(L=>{
+    const a=document.createElement('a');
+    a.className='card';
+    a.href = '#'+L.id;
+    a.innerHTML = `<div class="flex" style="justify-content:space-between">
+      <div><b>${L.baslik}</b><div class="badge">${L.ozet}</div></div>
+      <span class="chip">${L.seviye}</span>
+    </div>`;
+    toc.appendChild(a);
+  });
+  // LESSONS
+  cont.innerHTML='';
+  DERSLER.forEach(L=>cont.appendChild(createLessonCard(L)));
+}
+
+/* ================== YARDIMCILAR ================== */
+function escapeHtml(s){return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')}
+function copyText(text, btn){
+  navigator.clipboard.writeText(text).then(()=>{
+    const old=btn.textContent; btn.textContent="Kopyalandı ✓"; setTimeout(()=>btn.textContent=old,900);
+  });
+}
+
+/* ================== İLERLEME (localStorage) ================== */
+const KEY = id => `PY_ONEPAGE_DONE_${id}`;
+function tamamlaBolum(id, val){ localStorage.setItem(KEY(id), val?'1':'0'); boyaKart(id); }
+function tamamMi(id){ return localStorage.getItem(KEY(id))==='1'; }
+function boyaKart(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.style.outline = tamamMi(id)? '2px solid #22c55e' : 'none';
+}
+function guncelleGlobal(){
+  const toplam = DERSLER.length;
+  const bitti = DERSLER.filter(L=>tamamMi(L.id)).length;
+  globalInfo.textContent = `${bitti}/${toplam} tamamlandı`;
+  globalBar.style.width = `${Math.round((bitti/toplam)*100)}%`;
+}
+
+/* ================== TEMA ================== */
+const THEME_KEY='PY_THEME';
+function setTheme(t){ document.documentElement.setAttribute('data-theme', t); localStorage.setItem(THEME_KEY,t); }
+function toggleTheme(){ const cur=document.documentElement.getAttribute('data-theme')||'dark'; setTheme(cur==='dark'?'light':'dark'); }
+function initTheme(){ const t=localStorage.getItem(THEME_KEY)||'dark'; setTheme(t); }
+
+/* ================== OLAYLAR & BAŞLAT ================== */
+document.getElementById('toggleTheme').onclick=toggleTheme;
+document.getElementById('resetAll').onclick=()=>{
+  if(!confirm("Tüm ilerlemeyi sıfırlamak ister misin?")) return;
+  DERSLER.forEach(L=>localStorage.removeItem(KEY(L.id)));
+  guncelleGlobal();
+  DERSLER.forEach(L=>boyaKart(L.id));
+};
+
+initTheme();
+renderAll();
+DERSLER.forEach(L=>boyaKart(L.id));
+guncelleGlobal();
+</script>
+</body>
+</html><!-- Destek Bölümü -->
+<section id="destek">
+  <div class="card">
+    <h2>💛 Beni Destekle</h2>
+    <p>Bu siteyi geliştirmem için bana destek olmak istersen aşağıdaki butona tıklayabilirsin 🙏</p>
+    <a href="https://www.buymeacoffee.com/kullaniciadi" target="_blank" 
+       style="display:inline-block; background:#ffd700; color:#000; font-weight:bold; padding:0.8rem 1.5rem; border-radius:30px; text-decoration:none; box-shadow:0 0 10px #ffd700;">
+       ☕ Bana Destek Ol
+    </a>
+  </div>
+</section>
+
+
